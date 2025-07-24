@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="mainViewModel"
+            type="com.example.waterapp.MainViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:id="@+id/weightEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="35dp"
+            android:hint="Peso"
+            android:inputType="number"
+            android:text="@={mainViewModel.weight}" />
+
+        <Button
+            android:id="@+id/calculateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/weightEditText"
+            android:layout_marginTop="56dp"
+            android:onClick="@{() -> mainViewModel.calculateWaterIntake()}"
+            android:text="Calcular" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/glassesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/calculateButton"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="45dp"
+            app:spanCount="4"
+            app:glassList="@{mainViewModel.glassesList}"
+            tools:listitem="@layout/glass_view_model" />
+
+        <TextView
+            android:id="@+id/waterIntakeTextViewLabel"
+            android:layout_marginTop="31dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/waterIntakeTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="6dp"
+            android:text="Litros totais:" />
+
+        <TextView
+            android:id="@+id/waterIntakeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/glassesRecyclerView"
+            android:layout_centerHorizontal="true"
+            android:text="@{mainViewModel.waterIntakeText}" />
+
+        <TextView
+            android:id="@+id/waterDrunkTextViewLabel"
+            android:layout_marginTop="31dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/waterIntakeTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="6dp"
+            android:text="Litros bebidos até agora:" />
+
+        <TextView
+            android:id="@+id/waterDrunkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/waterDrunkTextViewLabel"
+            android:layout_centerHorizontal="true"
+            android:text="@{mainViewModel.waterDrunkText}" />
+
+    </RelativeLayout>
+</layout>
+
